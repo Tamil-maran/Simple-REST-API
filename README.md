@@ -1,2 +1,2 @@
 # Simple-REST-API
-A Simple REST API Endpoint.
+🌎 A Simple REST API Endpoint.
