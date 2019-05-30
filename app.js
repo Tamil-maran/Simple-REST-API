@@ -2,11 +2,16 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const User = require('./models/user');
+const cors = require('cors');
 
 mongoose.connect('mongodb://localhost:27017/optn',
 	{ useNewUrlParser: true }
 );
 
+app.use(cors());
+app.options('*', cors());
+
+// Middleware to parse JSON
 app.use(express.json());
 app.use('/addUser', (req, res, next) => {
 	const user = new User(req.body);
@@ -20,6 +25,8 @@ app.use('/addUser', (req, res, next) => {
 			})
 		})
 		.catch(err => {
+
+			// When save fails due to mismatch in schema
 			const errmsg = err.message;
 			console.log( "Error msg : " + errmsg);
 			res.status(400).json({
@@ -33,7 +40,8 @@ app.use('/', (req, res, next) => {
 	
 	res.status(404).json({
 		posted: false,
-		message: 'Wrong Endpoint'
+		message: 'Wrong Endpoint',
+		correct_endpoint: "http://localhost:3000/addUser"
 	})
 });
 
