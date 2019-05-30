@@ -39,7 +39,7 @@ app.use('/addUser', (req, res, next) => {
 		.catch(err => {
 			// When save fails due to mismatch in schema
 			const errmsg = err.message;
-			console.log( "Insert Error : " + errmsg);
+			console.log( "Insert ERROR : " + errmsg);
 			res.status(400).json({
 				posted: false,
 				message: errmsg 

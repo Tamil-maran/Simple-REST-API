@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-const {isEmail, isMobilePhone} = require('validator')
+const { isEmail, isMobilePhone } = require('validator')
 
 const bookSchema = Schema({
     name: {type: String, required: true },
