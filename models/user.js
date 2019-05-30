@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
+const {isEmail, isMobilePhone} = require('validator')
 
 const bookSchema = Schema({
     name: {type: String, required: true },
@@ -9,8 +10,22 @@ const bookSchema = Schema({
 
 const userSchema = Schema({
     name: {type: String, required: true },
-    phonenumber: String,
-    email: String,
+    phonenumber: { 
+        type: String, 
+        validate: {
+            validator: isMobilePhone,
+            message: '{VALUE} is not valid',
+            isAsync: false
+        }
+    },
+    email: { 
+        type: String, 
+        validate: {
+            validator: isEmail,
+            message: '{VALUE} is not valid',
+            isAsync: false
+        }
+    },
     books:[bookSchema]
 }, { collection: 'Books' });
 
