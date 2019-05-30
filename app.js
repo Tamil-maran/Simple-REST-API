@@ -1,8 +1,9 @@
 const express = require('express');
-const app = express();
 const mongoose = require('mongoose');
 const User = require('./models/user');
 const cors = require('cors');
+
+const app = express();
 
 mongoose.connect('mongodb://interntest:easyas123@interncluster-shard-00-00-zmzoh.mongodb.net:27017,' + 
 				'interncluster-shard-00-01-zmzoh.mongodb.net:27017,interncluster-shard-00-02-zmzoh.mongodb.net:27017/' + 
@@ -11,7 +12,7 @@ mongoose.connect('mongodb://interntest:easyas123@interncluster-shard-00-00-zmzoh
 );
 
 mongoose.connection.once('open', () => {
-	console.log('Connected to MongoDB Atlas.');
+	console.log('Connected to MongoDB Atlas');
 });
 
 mongoose.connection.on('error', err => {
@@ -30,7 +31,7 @@ app.use('/addUser', (req, res, next) => {
 	user
 		.save()
 		.then(doc => {
-			console.log( "Inserted doc : " + doc);
+			console.log( "Inserted doc: " + doc);
 			res.status(200).json({
 				posted: true,
 				user: doc 
@@ -39,7 +40,7 @@ app.use('/addUser', (req, res, next) => {
 		.catch(err => {
 			// When save fails due to mismatch in schema
 			const errmsg = err.message;
-			console.log( "Insert ERROR : " + errmsg);
+			console.log( "Insert ERROR: " + errmsg);
 			res.status(400).json({
 				posted: false,
 				message: errmsg 
